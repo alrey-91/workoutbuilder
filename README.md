@@ -45,10 +45,14 @@ TODO:
 * ~~Implement DAOs for current POJOs~~    
 * Try and get all possible exercises from external API   
 * ~~Log out endpoint?~~
+* Add authentication, logging
+* Reimplement postgres
 
 **Endpoints: (Spring Boot)**  
-Homework 5 uses in-memory H2 database, so it resets every run. Use /signup, /exercises endpoints to add new user and exercises data into db.  
-View database with /h2-console  
+Uses in-memory H2 database, so it resets every run. Use /signup, /exercises endpoints to add new user and exercises data into db.  
+View database with /h2-console 
+Completed full unit and integration testing with jacoco. Achieved 90.4% coverage.
+
 /Login:
 
 * Method: POST  
