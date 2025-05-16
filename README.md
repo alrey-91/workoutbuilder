@@ -51,14 +51,14 @@ TODO:
 **Endpoints: (Spring Boot)**  
 Uses in-memory H2 database, so it resets every run. Use /signup, /exercises endpoints to add new user and exercises data into db.  
 
-View database with /h2-console 
+Update hw7: Now uses local postgresql database
 
 Completed full unit and integration testing with jacoco. Achieved 90.4% coverage.
 
 /Login:
 
-* Method: POST  
-* Request: username and password credentials, must be registered user  
+* Method: POST, GET for /login.html form  
+* Request: username and password credentials, must be registered user OR: oauth2 login with google  
 * Response: success or fail. on success, set user session  
 * After logging in, pertain user session with cookie
 
