@@ -12,13 +12,16 @@ import jakarta.persistence.Id;
 public class User {
   
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(nullable= false, unique= true)
     private String username;
     @JsonIgnore //dont return password in response
-    @Column(nullable= false)
+    @Column(nullable= true)
     private String password;
+
+    @Column
+    private String provider;
 
     protected User() {} //default for JPA
 
@@ -57,6 +60,13 @@ public class User {
         this.password = password;
     }
 
+    public String getProvider() {
+        return provider;
+    }
+
+    public void setProvider(String provider) {
+        this.provider = provider;
+    }
     
     
 }

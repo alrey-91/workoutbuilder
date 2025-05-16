@@ -5,6 +5,8 @@ import org.springframework.stereotype.Component;
 import com.csc435.workoutbuilder.model.Exercise;
 import java.util.*;
 import java.lang.StringBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Component
 public class FetchExercises {
@@ -12,6 +14,7 @@ public class FetchExercises {
     private static final String KEY = "qCxpwnAI9M50dCpnf+F5/Q==Qw2uHLCjkWFRlyKn";
     
     private final RestTemplate restTemplate;
+    private final Logger logger = LoggerFactory.getLogger(FetchExercises.class);
     
     public FetchExercises(RestTemplate restTemplate) {
         //constructor injection
@@ -19,7 +22,7 @@ public class FetchExercises {
     }
     
     public List<Exercise> fetch(String muscle, String type) {
-
+        logger.debug("calling external API at '{}'...", API_URL);
         try {
             StringBuilder buildUrl = new StringBuilder(API_URL);
             boolean hasParam = false;
@@ -42,16 +45,22 @@ public class FetchExercises {
         ResponseEntity<Exercise[]> resp = restTemplate.exchange(buildUrl.toString(),HttpMethod.GET, request, Exercise[].class);
 
         if (resp.getStatusCode() == HttpStatus.OK) {
-            System.out.println("fetched exercises successfully");
-            return Arrays.asList(resp.getBody());
+            if (Arrays.asList(resp.getBody()).size()  == 0) {
+                logger.info("Did not fetch any exercises from external API with params muscle='{}' and type='{}'",muscle, type);
+            } else {
+                logger.info("Fetched exercises successfully from external API with params muscle='{}' and type='{}'",muscle, type);
+            }  
             
+            logger.info("Fetched {} exercises from API", Arrays.asList(resp.getBody()).size());
+            return Arrays.asList(resp.getBody());     
         } else {
-            System.out.println("api error" + resp.getStatusCode());
+            logger.error("api error: HTTP status code {}", resp.getStatusCode());
             return List.of();
         }
     } catch (Exception e) {
         e.printStackTrace();
-        return List.of();
+        logger.error("Error fetching exercises from API: ", e);
+        return List.of();    
     }
     
     }
