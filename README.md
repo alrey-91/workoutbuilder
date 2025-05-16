@@ -115,7 +115,8 @@ Completed full unit and integration testing with jacoco. Achieved 90.4% coverage
 
 | Endpoint | RESTful methods | Request Parameters (or JSON req body) | Response |
 | :---- | :---- | :---- | :---- |
-| /login | POST | Username, password (JSON body) | JSON: success (boolean) message string, or failed. Set session to users id |
+| /login | POST | Username, password (URL encoded body) | JSON: success (boolean) message string, or failed. Set session to users id |
+| /login.html | GET | Show login form in browser. Choose login form or oauth2 | JSON resp: success, set session authenticated, or fail (wrong login or oauth failed) |
 | /signup | POST | New username, password, new user added to DB. same json format as /login | JSON: if successful signup: success, user can login, if not (blank parameters or username taken) not succesful |
 | /logout | POST | Current user must be in session | Success: logout and invalidate session, fail if no client is logged in |
 | /exercises | GET | ?muscle=”muscle” and/or ?/\&Type=”type” (for URI to filter exercises) | JSON: List of exercises fetched from API (up to 10), then workouts in db. Success \= trueIf no workouts found, list will be empty and “success”: will be false. Return error if no response from external API. no params will now show ALL exercises in DB |
