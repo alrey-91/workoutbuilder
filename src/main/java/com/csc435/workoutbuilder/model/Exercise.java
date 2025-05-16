@@ -3,6 +3,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -12,7 +13,7 @@ import jakarta.persistence.Id;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Exercise {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(nullable= false,unique= true)
     private String name;
@@ -20,9 +21,9 @@ public class Exercise {
     private String type;
     @Column(length= 3000)
     private String instructions;
-    @Column(nullable= true)
+    @Transient
     private Integer sets;
-    @Column(nullable= true)
+    @Transient
     private Integer reps;
 
     protected Exercise() {}
