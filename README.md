@@ -47,6 +47,7 @@ TODO:
 * ~~Log out endpoint?~~
 * Add authentication, logging
 * Reimplement postgres
+* React frontend SOON
 
 **Endpoints: (Spring Boot)**  
 Uses in-memory H2 database, so it resets every run. Use /signup, /exercises endpoints to add new user and exercises data into db.  
