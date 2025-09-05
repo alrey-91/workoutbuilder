@@ -1,4 +1,5 @@
 package com.csc435.workoutbuilder.service;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.stereotype.Component;
@@ -11,7 +12,9 @@ import org.slf4j.LoggerFactory;
 @Component
 public class FetchExercises {
     private static final String API_URL = "https://api.api-ninjas.com/v1/exercises";
-    private static final String KEY = "qCxpwnAI9M50dCpnf+F5/Q==Qw2uHLCjkWFRlyKn";
+    
+    @Value("${api.ninjas.key}")
+    private String KEY;
     
     private final RestTemplate restTemplate;
     private final Logger logger = LoggerFactory.getLogger(FetchExercises.class);
